@@ -1,0 +1,53 @@
+# 👉 Build output
+/dist
+/build
+/tmp
+/out-tsc
+/bazel-out
+/coverage
+
+# 👉 Node.js
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 👉 Angular
+.angular/
+.angular/cache/
+.tailwind-cache/
+
+# 👉 Environment
+.env
+.env.*.local
+*.local
+
+# 👉 Lock files (optionnel à ignorer selon workflow)
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# 👉 IDEs and editors
+.idea/
+*.iml
+modules.xml
+vcs.xml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.history/
+
+# 👉 Misc
+/connect.lock
+/libpeerconnection.log
+testem.log
+/typings
+.sass-cache/
+
+# 👉 OS files
+.DS_Store
+Thumbs.db
