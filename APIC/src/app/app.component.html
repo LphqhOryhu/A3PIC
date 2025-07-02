@@ -1,9 +1,21 @@
-<app-navbar></app-navbar>
+<app-navbar (toggleSidebar)="sidebarOpen = !sidebarOpen"></app-navbar>
 
 <div class="flex h-[calc(100vh-4rem)] bg-white dark:bg-gray-900 text-black dark:text-white">
-  <app-sidebar></app-sidebar>
 
-  <main class="flex-1 overflow-auto p-6">
+  <div
+    class="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden"
+    *ngIf="sidebarOpen"
+    (click)="sidebarOpen = false">
+  </div>
+
+  <app-sidebar
+    [ngClass]="{
+      'fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] z-50 bg-white dark:bg-gray-800 transform transition-transform duration-300 md:relative md:translate-x-0': true,
+      '-translate-x-full': !sidebarOpen && isMobile()
+    }"
+  ></app-sidebar>
+
+  <main class="flex-1 overflow-auto p-6 md:ml-64">
     <router-outlet></router-outlet>
   </main>
 </div>

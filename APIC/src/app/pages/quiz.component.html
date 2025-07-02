@@ -1,25 +1,23 @@
-<!-- Vue d’accueil avec cartes -->
-<div *ngIf="!selectedQuiz" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div *ngIf="!selectedQuiz" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4">
   <button
     *ngFor="let quiz of quizzes"
     (click)="selectQuiz(quiz)"
-    class="p-4 rounded-lg shadow bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+    class="p-4 rounded-xl shadow bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex flex-col items-start text-left"
   >
-    <h2 class="text-lg font-semibold">{{ quiz.title }}</h2>
+    <h2 class="text-lg md:text-xl font-semibold">{{ quiz.title }}</h2>
   </button>
 </div>
 
 <!-- Vue de question -->
-<!-- Vue de question -->
-<div *ngIf="selectedQuiz && !showResult" class="space-y-4">
-  <h2 class="text-xl font-bold">
+<div *ngIf="selectedQuiz && !showResult" class="space-y-6 p-4 max-w-3xl mx-auto">
+  <h2 class="text-lg md:text-xl font-bold">
     {{ selectedQuiz.questions[currentQuestionIndex].question }}
   </h2>
 
-  <div class="grid gap-2">
+  <div class="grid gap-3">
     <label
       *ngFor="let option of selectedQuiz.questions[currentQuestionIndex].options; let i = index"
-      class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer transition
+      class="flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition
              bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
       [class.border-blue-500]="selectedAnswerIndexes.includes(i)"
     >
@@ -27,30 +25,43 @@
         type="checkbox"
         [checked]="selectedAnswerIndexes.includes(i)"
         (change)="toggleAnswer(i)"
-        class="form-checkbox h-5 w-5 text-blue-600"
+        class="form-checkbox mt-1 h-5 w-5 text-blue-600"
       />
-      <span>{{ option }}</span>
+      <span class="text-sm md:text-base">{{ option }}</span>
     </label>
   </div>
 
-  <div class="flex justify-between items-center pt-4">
-    <p>Question {{ currentQuestionIndex + 1 }}/{{ selectedQuiz.questions.length }}</p>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4">
+    <p class="text-sm text-gray-700 dark:text-gray-300">
+      Question {{ currentQuestionIndex + 1 }}/{{ selectedQuiz.questions.length }}
+    </p>
     <button
       (click)="submitAnswer()"
-      class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow"
+      class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow text-sm md:text-base"
     >
       Valider
     </button>
   </div>
+
+  <!-- Source -->
+  <div *ngIf="selectedQuiz.questions[currentQuestionIndex]?.source"
+       class="mt-6 text-sm text-gray-600 dark:text-gray-300 border-t pt-4">
+    📚 Source :
+    <a
+      [href]="extractLink(selectedQuiz.questions[currentQuestionIndex].source)"
+      target="_blank"
+      class="underline hover:text-blue-500">
+      {{ selectedQuiz.questions[currentQuestionIndex].source }}
+    </a>
+  </div>
 </div>
 
-
 <!-- Vue résultat -->
-<div *ngIf="showResult && selectedQuiz" class="text-center mt-8">
-  <h2 class="text-2xl font-bold mb-4">
+<div *ngIf="showResult && selectedQuiz" class="text-center mt-8 p-4 max-w-2xl mx-auto">
+  <h2 class="text-xl md:text-2xl font-bold mb-4">
     Score : {{ score }}/{{ selectedQuiz.questions.length }}
   </h2>
-  <button (click)="reset()" class="px-4 py-2 bg-green-600 text-white rounded">
+  <button (click)="reset()" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-sm md:text-base">
     Revenir à la liste des quiz
   </button>
 </div>

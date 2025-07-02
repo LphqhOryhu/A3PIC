@@ -1,4 +1,11 @@
 <header class="h-16 bg-white dark:bg-gray-800 text-black dark:text-white flex items-center justify-between px-6 shadow-md">
   <div class="text-xl font-semibold">A3PIC</div>
   <app-theme-toggle></app-theme-toggle>
+  <button
+    class="md:hidden text-gray-700 dark:text-gray-200 p-2"
+    (click)="toggleSidebar.emit()"
+  >
+    ☰
+  </button>
+
 </header>

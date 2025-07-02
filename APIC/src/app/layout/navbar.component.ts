@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {ThemeToggleComponent} from '../components/theme-toggle.component';
 
 @Component({
@@ -8,5 +8,5 @@ import {ThemeToggleComponent} from '../components/theme-toggle.component';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-
+  @Output() toggleSidebar = new EventEmitter<void>();
 }

@@ -19,6 +19,11 @@ export class QuizComponent {
   selectedAnswerIndex: number | null = null;
   score = 0;
   showResult = false;
+  extractLink(source?: string): string {
+    if (!source) return '#';
+    const match = source.match(/\((https?:\/\/[^\)]+)\)/);
+    return match ? match[1] : '#';
+  }
 
   selectQuiz(quiz: Quiz) {
     this.selectedQuiz = quiz;
