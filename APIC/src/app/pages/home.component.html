@@ -1,56 +1,135 @@
+<!-- Template HTML -->
 <div class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950 min-h-screen">
-  <div class="relative z-10 max-w-4xl mx-auto px-6 py-20 space-y-16">
+  <!-- Fond parallax animé -->
+  <div class="fixed inset-0 parallax-bg opacity-50"
+       [style.transform]="'translateY(' + parallaxOffset + 'px)'">
+  </div>
 
-    <section class="text-center">
-      <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white mb-4">CyberAide</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-        Un site simple et accessible pour comprendre les risques numériques et apprendre à s’en protéger. Pas besoin d’être un expert : nous vous guidons pas à pas.
-      </p>
+  <!-- Contenu principal -->
+  <div class="relative z-10 min-h-screen">
+
+    <!-- Section Hero -->
+    <section class="flex items-center justify-center min-h-screen px-6">
+      <div class="max-w-4xl mx-auto text-center space-y-8">
+        <div class="hero-text" [@fadeInUp]>
+          <h1 class="text-6xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+            A3PIC
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Un site simple et accessible pour comprendre les risques numériques et apprendre à s'en protéger.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8" [@fadeInUp]="{ delay: '200ms' }">
+          <button
+            (click)="goTo('/quiz')"
+            class="px-8 py-4 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            🎯 Commencer un quiz
+          </button>
+          <button
+            (click)="goTo('/learn')"
+            class="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-gray-200 dark:border-gray-700"
+          >
+            📚 Voir le glossaire
+          </button>
+        </div>
+      </div>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Pourquoi c'est important</h2>
-      <p class="text-gray-700 dark:text-gray-300">
-        Chaque jour, des milliers de personnes sont victimes de fraudes, de piratages ou d’arnaques en ligne. CyberAide vous accompagne pour comprendre ces risques et les éviter au quotidien.
-      </p>
+    <!-- Section Pourquoi c'est important -->
+    <section class="py-20 px-6" [@scrollReveal] *ngIf="sectionsVisible['importance']"
+    >
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl border border-gray-200 dark:border-gray-700">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
+            ⚠️ Pourquoi c'est important
+          </h2>
+          <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center max-w-3xl mx-auto">
+            Chaque jour, des milliers de personnes sont victimes de fraudes, de piratages ou d'arnaques en ligne.
+            A3PIC vous accompagne pour comprendre ces risques et les éviter au quotidien.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Ce que vous trouverez ici</h2>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 dark:text-gray-300">
-        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-lg mb-1">Quiz interactifs</h3>
-          <p>Testez vos connaissances sur les bons réflexes numériques.</p>
-        </li>
-        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-lg mb-1">Glossaire simplifié</h3>
-          <p>Comprenez les termes techniques avec des définitions claires.</p>
-        </li>
-        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-lg mb-1">Histoires vraies</h3>
-          <p>Découvrez des cas réels d’erreurs de sécurité, pour apprendre de leurs conséquences.</p>
-        </li>
-        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-lg mb-1">Conseils pratiques</h3>
-          <p>Des recommandations simples pour sécuriser vos comptes, appareils et habitudes.</p>
-        </li>
-      </ul>
+    <!-- Section Ce que vous trouverez -->
+    <section class="py-20 px-6" [@scrollReveal] *ngIf="sectionsVisible['features']">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-12 text-center">
+          🎯 Ce que vous trouverez ici
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div *ngFor="let feature of features; let i = index"
+               class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 card-hover"
+               [@staggerAnimation]="{ delay: i * 150 + 'ms' }">
+            <div class="text-4xl mb-4">{{ feature.icon }}</div>
+            <h3 class="font-bold text-xl mb-3 text-gray-900 dark:text-white">{{ feature.title }}</h3>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-      <button
-        (click)="goTo('/quiz')"
-        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow"
-      >
-        Commencer un quiz
-      </button>
-
-      <button
-        (click)="goTo('/learn')"
-        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow"
-      >
-        Voir le glossaire
-      </button>
+    <!-- Section finale CTA -->
+    <section class="py-20 px-6" [@scrollReveal] *ngIf="sectionsVisible['cta']">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-8 md:p-12 shadow-2xl text-white">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            🚀 Prêt à commencer ?
+          </h2>
+          <p class="text-lg md:text-xl mb-8 opacity-90">
+            Rejoignez des milliers d'utilisateurs qui ont déjà renforcé leur sécurité numérique
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              (click)="goTo('/quiz')"
+              class="px-8 py-4 bg-white text-blue-600 font-medium rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              🎯 Commencer maintenant
+            </button>
+            <button
+              (click)="goTo('/learn')"
+              class="px-8 py-4 bg-transparent text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 border-2 border-white/30 hover:border-white/50"
+            >
+              📚 Explorer le contenu
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </div>
+
+<!-- Styles CSS à ajouter dans votre fichier component.scss -->
+<style>
+  .parallax-bg {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(96, 165, 250, 0.05) 0%, transparent 50%);
+    background-size: 800px 800px, 600px 600px, 400px 400px;
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(1deg); }
+    66% { transform: translateY(-10px) rotate(-1deg); }
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .card-hover:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+</style>
