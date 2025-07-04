@@ -1,21 +1,39 @@
-<app-navbar (toggleSidebar)="sidebarOpen = !sidebarOpen"></app-navbar>
+<app-navbar
+  class="fixed top-0 left-0 w-full h-16 z-50"
+  (toggleSidebar)="sidebarOpen = !sidebarOpen"
+></app-navbar>
 
-<div class="flex h-[calc(100vh-4rem)] bg-white dark:bg-gray-900 text-black dark:text-white">
+<div class="flex flex-col min-h-screen pt-16 bg-white dark:bg-gray-900 text-black dark:text-white">
 
+  <!-- Overlay mobile -->
   <div
-    class="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden"
-    *ngIf="sidebarOpen"
-    (click)="sidebarOpen = false">
+    *ngIf="sidebarOpen && isMobile()"
+    class="fixed inset-0 z-40 backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 md:hidden"
+    (click)="sidebarOpen = false"
+  ></div>
+
+  <div class="flex flex-1">
+
+    <!-- Sidebar mobile -->
+    <app-sidebar
+      *ngIf="isMobile()"
+      (closeSidebar)="sidebarOpen = false"
+      [ngClass]="{
+        'fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] z-50 bg-white dark:bg-gray-800 shadow-md transition-transform duration-300 transform': true,
+        'translate-x-0': sidebarOpen,
+        '-translate-x-full': !sidebarOpen
+      }"
+    ></app-sidebar>
+
+    <!-- Sidebar desktop -->
+    <app-sidebar
+      *ngIf="!isMobile()"
+      class="fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-white dark:bg-gray-800 shadow-md z-40 overflow-y-auto"
+    ></app-sidebar>
+
+    <!-- Contenu -->
+    <main class="flex-1 p-6 overflow-y-auto ml-0 md:ml-64">
+      <router-outlet></router-outlet>
+    </main>
   </div>
-
-  <app-sidebar
-    [ngClass]="{
-      'fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] z-50 bg-white dark:bg-gray-800 transform transition-transform duration-300 md:relative md:translate-x-0': true,
-      '-translate-x-full': !sidebarOpen && isMobile()
-    }"
-  ></app-sidebar>
-
-  <main class="flex-1 overflow-auto p-6 md:ml-64">
-    <router-outlet></router-outlet>
-  </main>
 </div>

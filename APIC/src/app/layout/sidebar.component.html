@@ -1,20 +1,24 @@
 <nav class="w-64 bg-white dark:bg-gray-800 shadow-md h-full p-4">
   <ul class="space-y-4">
     <li>
-      <a routerLink="/" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }">
-      Accueil
-      </a></li>
+      <a routerLink="/" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }" (click)="onLinkClick()">
+        Accueil
+      </a>
+    </li>
     <li>
-      <a routerLink="/quiz" routerLinkActive="font-bold">
-        Se tester
-      </a></li>
-    <li>
-      <a routerLink="/learn" routerLinkActive="font-bold">
+      <a routerLink="/learn" routerLinkActive="font-bold" (click)="onLinkClick()">
         S’informer
-      </a></li>
+      </a>
+    </li>
     <li>
-      <a routerLink="/stories" routerLinkActive="font-bold">
+      <a routerLink="/quiz" routerLinkActive="font-bold" (click)="onLinkClick()">
+        Se tester
+      </a>
+    </li>
+    <li>
+      <a routerLink="/stories" routerLinkActive="font-bold" (click)="onLinkClick()">
         Faits marquants
-      </a></li>
+      </a>
+    </li>
   </ul>
 </nav>

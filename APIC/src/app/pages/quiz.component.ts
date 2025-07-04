@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { QUIZZES, Quiz } from '../data/quiz-data';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-quiz',
   standalone: true,
@@ -69,4 +68,26 @@ export class QuizComponent {
     this.selectedAnswerIndex = null;
     this.showResult = false;
   }
+
+  isCorrectAnswer(index: number): boolean {
+    const question = this.selectedQuiz?.questions[this.currentQuestionIndex];
+    return question ? question.answerIndexes.includes(index) : false;
+  }
+
+  getCorrectAnswerText(question: Quiz['questions'][number]): string {
+    const answers = question.answerIndexes.map(i => question.options[i]);
+
+    if (question.multiple) {
+      return `<ul class="list-disc pl-5">
+      ${answers.map(answer => `<li>${answer}</li>`).join('')}
+    </ul>`;
+    }
+
+    return answers[0];
+  }
+
+
+
+
+
 }

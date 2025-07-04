@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [
-    RouterLink,
-    RouterLinkActive
-  ],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  @Output() closeSidebar = new EventEmitter<void>();
 
+  onLinkClick() {
+    this.closeSidebar.emit();
+  }
 }

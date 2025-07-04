@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from './layout/navbar.component';
 import {SidebarComponent} from './layout/sidebar.component';
@@ -15,8 +15,17 @@ export class AppComponent {
   title = 'APIC';
 
   sidebarOpen = false;
+  isMobileScreen = window.innerWidth < 768;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobileScreen = window.innerWidth < 768;
+    if (!this.isMobileScreen) {
+      this.sidebarOpen = false; // sécurité : ferme la sidebar si on repasse en desktop
+    }
+  }
 
   isMobile(): boolean {
-    return window.innerWidth < 768;
+    return this.isMobileScreen;
   }
 }

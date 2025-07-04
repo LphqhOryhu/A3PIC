@@ -1,11 +1,12 @@
-<div *ngIf="!selectedQuiz" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4">
+<div *ngIf="!selectedQuiz" class="flex flex-col gap-4 p-4 max-w-3xl mx-auto">
   <button
     *ngFor="let quiz of quizzes"
     (click)="selectQuiz(quiz)"
-    class="p-4 rounded-xl shadow bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex flex-col items-start text-left"
+    class="w-full p-6 rounded-xl shadow bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition flex flex-col items-start text-left"
   >
     <h2 class="text-lg md:text-xl font-semibold">{{ quiz.title }}</h2>
   </button>
+
 </div>
 
 <!-- Vue de question -->
@@ -61,6 +62,25 @@
   <h2 class="text-xl md:text-2xl font-bold mb-4">
     Score : {{ score }}/{{ selectedQuiz.questions.length }}
   </h2>
+
+  <div class="mt-8 text-left space-y-6">
+    <h3 class="text-lg font-semibold text-center">🧠 Explications pour les erreurs</h3>
+
+    <div *ngFor="let question of selectedQuiz.questions; let i = index">
+      <div *ngIf="!isCorrectAnswer(i)" class="bg-red-100 dark:bg-red-900 p-4 rounded-lg shadow text-sm mb-8">
+        <p class="font-semibold mb-2 text-red-800 dark:text-red-300">❌ Question {{ i + 1 }} : {{ question.question }}</p>
+        <p class="text-gray-800 dark:text-gray-100 mb-1">
+          ✅ Bonne réponse :
+          <span class="font-medium" [innerHTML]="getCorrectAnswerText(question)"></span>
+
+        </p>
+        <p class="italic text-gray-600 dark:text-gray-300 mt-1">
+          {{ question.explanation }}
+        </p>
+      </div>
+    </div>
+  </div>
+
   <button (click)="reset()" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-sm md:text-base">
     Revenir à la liste des quiz
   </button>

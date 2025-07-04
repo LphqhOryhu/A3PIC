@@ -1,1 +1,12 @@
-<p>stories works!</p>
+<div class="p-6 max-w-4xl mx-auto space-y-6">
+  <h2 class="text-2xl font-bold text-center">📌 Faits réels liés à la cybersécurité</h2>
+
+  <div *ngFor="let story of stories" class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 space-y-3 border border-gray-100 dark:border-gray-700">
+    <h3 class="text-lg font-semibold">{{ story.title }}</h3>
+    <p class="text-sm text-gray-700 dark:text-gray-300">{{ story.description }}</p>
+    <p class="text-sm text-red-600 dark:text-red-400 italic">Erreur : {{ story.error }}</p>
+    <a [href]="story.source.url" target="_blank" class="text-blue-600 dark:text-blue-400 underline text-sm">
+      🔗 Source : {{ story.source.name }}
+    </a>
+  </div>
+</div>

@@ -1,3 +1,56 @@
-<div class="text-center mt-8">
-  <h1 class="text-3xl font-bold">Thème {{ theme.getTheme() }}</h1>
+<div class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950 min-h-screen">
+  <div class="relative z-10 max-w-4xl mx-auto px-6 py-20 space-y-16">
+
+    <section class="text-center">
+      <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white mb-4">CyberAide</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+        Un site simple et accessible pour comprendre les risques numériques et apprendre à s’en protéger. Pas besoin d’être un expert : nous vous guidons pas à pas.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Pourquoi c'est important</h2>
+      <p class="text-gray-700 dark:text-gray-300">
+        Chaque jour, des milliers de personnes sont victimes de fraudes, de piratages ou d’arnaques en ligne. CyberAide vous accompagne pour comprendre ces risques et les éviter au quotidien.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Ce que vous trouverez ici</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 dark:text-gray-300">
+        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+          <h3 class="font-semibold text-lg mb-1">Quiz interactifs</h3>
+          <p>Testez vos connaissances sur les bons réflexes numériques.</p>
+        </li>
+        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+          <h3 class="font-semibold text-lg mb-1">Glossaire simplifié</h3>
+          <p>Comprenez les termes techniques avec des définitions claires.</p>
+        </li>
+        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+          <h3 class="font-semibold text-lg mb-1">Histoires vraies</h3>
+          <p>Découvrez des cas réels d’erreurs de sécurité, pour apprendre de leurs conséquences.</p>
+        </li>
+        <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow border border-gray-200 dark:border-gray-700">
+          <h3 class="font-semibold text-lg mb-1">Conseils pratiques</h3>
+          <p>Des recommandations simples pour sécuriser vos comptes, appareils et habitudes.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+      <button
+        (click)="goTo('/quiz')"
+        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow"
+      >
+        Commencer un quiz
+      </button>
+
+      <button
+        (click)="goTo('/learn')"
+        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow"
+      >
+        Voir le glossaire
+      </button>
+    </section>
+  </div>
 </div>
